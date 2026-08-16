@@ -1,4 +1,5 @@
 import { values, type Value } from "@/lib/content";
+import { Reveal, RevealItem } from "@/components/motion/Reveal";
 
 function ValueItem({ value }: { value: Value }) {
   return (
@@ -23,7 +24,7 @@ export function Sobre() {
       className="bg-cream px-5 py-16 sm:px-8 sm:py-24 lg:py-[120px]"
     >
       <div className="mx-auto grid max-w-[1180px] grid-cols-1 items-start gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-18">
-        <div>
+        <Reveal>
           <span className="text-xs font-bold tracking-[0.24em] text-gold">
             O ESCRITÓRIO
           </span>
@@ -40,12 +41,14 @@ export function Sobre() {
             O primeiro contato já é direcionado ao advogado responsável pela
             área correspondente ao caso.
           </p>
-        </div>
-        <div className="flex flex-col gap-7">
+        </Reveal>
+        <Reveal stagger className="flex flex-col gap-7">
           {values.map((value) => (
-            <ValueItem key={value.n} value={value} />
+            <RevealItem key={value.n}>
+              <ValueItem value={value} />
+            </RevealItem>
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
   );
