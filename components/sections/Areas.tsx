@@ -1,5 +1,6 @@
 import { Shield, Receipt, Scale } from "lucide-react";
 import { areas, type Area } from "@/lib/content";
+import { Reveal, RevealItem } from "@/components/motion/Reveal";
 
 const icons = {
   shield: Shield,
@@ -53,19 +54,24 @@ export function Areas() {
       id="areas"
       className="bg-white px-5 py-16 sm:px-8 sm:py-24 lg:py-[120px]"
     >
-      <div className="mx-auto max-w-[1180px]">
+      <Reveal className="mx-auto max-w-[1180px]">
         <span className="text-xs font-bold tracking-[0.24em] text-gold">
           ÁREAS DE ATUAÇÃO
         </span>
         <h2 className="mt-3.5 max-w-[620px] text-[28px] font-bold leading-[1.25] sm:text-4xl">
           Cada advogado responde diretamente por sua área de atuação.
         </h2>
-      </div>
-      <div className="mx-auto mt-10 grid max-w-[1180px] grid-cols-1 gap-6 sm:mt-14 sm:grid-cols-2 sm:gap-7 lg:grid-cols-3">
+      </Reveal>
+      <Reveal
+        stagger
+        className="mx-auto mt-10 grid max-w-[1180px] grid-cols-1 gap-6 sm:mt-14 sm:grid-cols-2 sm:gap-7 lg:grid-cols-3"
+      >
         {areas.map((area) => (
-          <AreaCard key={area.tag} area={area} />
+          <RevealItem key={area.tag}>
+            <AreaCard area={area} />
+          </RevealItem>
         ))}
-      </div>
+      </Reveal>
     </section>
   );
 }
