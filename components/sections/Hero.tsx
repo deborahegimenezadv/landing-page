@@ -1,24 +1,38 @@
 // components/sections/Hero.tsx
 "use client";
 
-import { motion, type Variants } from "motion/react";
+import { motion, useReducedMotion, type Variants } from "motion/react";
 import { whatsappLink } from "@/lib/content";
 import { useIntro } from "@/components/intro/IntroProvider";
 
 const EASE = [0.16, 0.84, 0.44, 1] as const;
 
-const container: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
-};
-
-const item: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } },
-};
-
 export function Hero() {
   const introDone = useIntro();
+  const prefersReducedMotion = useReducedMotion();
+
+  // `motion`'s `reducedMotion="user"` only auto-disables positional/transform
+  // keys (x, y, scale, rotate...) — it leaves opacity's own duration/stagger
+  // untouched. Without this override, reduced-motion users would still wait
+  // out the full 0.7s/staggered opacity fade instead of seeing the hero
+  // near-instantly once the intro completes.
+  const container: Variants = {
+    hidden: {},
+    visible: prefersReducedMotion
+      ? { transition: { staggerChildren: 0, delayChildren: 0 } }
+      : { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+  };
+
+  const item: Variants = {
+    hidden: { opacity: 0, y: 24 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: prefersReducedMotion
+        ? { duration: 0.15, ease: EASE }
+        : { duration: 0.7, ease: EASE },
+    },
+  };
 
   return (
     <section
