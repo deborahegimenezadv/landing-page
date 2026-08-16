@@ -1,5 +1,6 @@
 import { contact, whatsappLink } from "@/lib/content";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
+import { Reveal } from "@/components/motion/Reveal";
 
 export function Contato() {
   return (
@@ -7,7 +8,7 @@ export function Contato() {
       id="contato"
       className="bg-navy px-5 py-16 sm:px-8 sm:py-24 lg:py-[120px]"
     >
-      <div className="mx-auto grid max-w-[1180px] grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
+      <Reveal className="mx-auto grid max-w-[1180px] grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
         <div>
           <span className="text-xs font-bold tracking-[0.24em] text-gold">
             LOCALIZAÇÃO E CONTATO
@@ -42,7 +43,7 @@ export function Contato() {
           rounded
           className="h-80 w-full"
         />
-      </div>
+      </Reveal>
     </section>
   );
 }
