@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { lawyers, type Lawyer } from "@/lib/content";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
+import { Reveal, RevealItem } from "@/components/motion/Reveal";
 
 function LawyerCard({ lawyer }: { lawyer: Lawyer }) {
   return (
@@ -16,10 +17,7 @@ function LawyerCard({ lawyer }: { lawyer: Lawyer }) {
           />
         </div>
       ) : (
-        <ImagePlaceholder
-          label={lawyer.photoLabel}
-          className="h-80 w-full"
-        />
+        <ImagePlaceholder label={lawyer.photoLabel} className="h-80 w-full" />
       )}
       <div className="pt-[22px]">
         <h3 className="mb-1 text-[19px] font-bold">{lawyer.name}</h3>
@@ -43,19 +41,24 @@ export function Advogados() {
       id="advogados"
       className="bg-white px-5 py-16 sm:px-8 sm:py-24 lg:py-[120px]"
     >
-      <div className="mx-auto max-w-[1180px]">
+      <Reveal className="mx-auto max-w-[1180px]">
         <span className="text-xs font-bold tracking-[0.24em] text-gold">
           EQUIPE
         </span>
         <h2 className="mt-3.5 max-w-[620px] text-[28px] font-bold leading-[1.25] sm:text-4xl">
           Advogados responsáveis por área.
         </h2>
-      </div>
-      <div className="mx-auto mt-10 grid max-w-[1180px] grid-cols-1 gap-8 sm:mt-14 sm:grid-cols-2 lg:grid-cols-3">
+      </Reveal>
+      <Reveal
+        stagger
+        className="mx-auto mt-10 grid max-w-[1180px] grid-cols-1 gap-8 sm:mt-14 sm:grid-cols-2 lg:grid-cols-3"
+      >
         {lawyers.map((lawyer) => (
-          <LawyerCard key={lawyer.name} lawyer={lawyer} />
+          <RevealItem key={lawyer.name}>
+            <LawyerCard lawyer={lawyer} />
+          </RevealItem>
         ))}
-      </div>
+      </Reveal>
     </section>
   );
 }
