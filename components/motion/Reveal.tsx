@@ -7,7 +7,11 @@ const EASE = [0.16, 0.84, 0.44, 1] as const;
 
 export const revealItemVariants: Variants = {
   hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
+  visible: (delay: number = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: EASE, delay },
+  }),
 };
 
 const containerVariants: Variants = {
@@ -35,7 +39,7 @@ export function Reveal({
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
-      transition={stagger ? undefined : { duration: 0.6, ease: EASE, delay }}
+      custom={delay}
     >
       {children}
     </motion.div>

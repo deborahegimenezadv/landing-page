@@ -1,16 +1,24 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { whatsappLink } from "@/lib/content";
 
 export function WhatsAppButton() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <div className="fixed bottom-5 right-5 z-40 sm:bottom-7 sm:right-7">
       <motion.span
         aria-hidden="true"
-        className="absolute inset-0 rounded-full bg-gold"
-        animate={{ scale: [1, 1.6], opacity: [0.5, 0] }}
-        transition={{ duration: 2.4, repeat: Infinity, ease: "easeOut" }}
+        className="pointer-events-none absolute inset-0 rounded-full bg-gold"
+        animate={
+          prefersReducedMotion ? undefined : { scale: [1, 1.6], opacity: [0.5, 0] }
+        }
+        transition={
+          prefersReducedMotion
+            ? undefined
+            : { duration: 2.4, repeat: Infinity, ease: "easeOut" }
+        }
       />
       <a
         href={whatsappLink}

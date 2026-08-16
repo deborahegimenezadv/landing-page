@@ -14,6 +14,7 @@ export function IntroProvider({ children }: { children: ReactNode }) {
   const [introDone, setIntroDone] = useState(false);
 
   return (
+    // Every motion.* component must render under this provider to get reduced-motion coverage.
     <MotionConfig reducedMotion="user">
       <IntroContext.Provider value={introDone}>
         {!introDone && <IntroLoader onComplete={() => setIntroDone(true)} />}

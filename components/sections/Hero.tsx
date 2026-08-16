@@ -1,4 +1,3 @@
-// components/sections/Hero.tsx
 "use client";
 
 import { motion, useReducedMotion, type Variants } from "motion/react";
@@ -117,8 +116,16 @@ export function Hero() {
       <div className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-1.5 sm:flex">
         <motion.span
           className="h-[34px] w-px bg-white/40"
-          animate={{ y: [0, 8, 0], opacity: [0.5, 1, 0.5] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          animate={
+            prefersReducedMotion
+              ? undefined
+              : { y: [0, 8, 0], opacity: [0.5, 1, 0.5] }
+          }
+          transition={
+            prefersReducedMotion
+              ? undefined
+              : { duration: 2, repeat: Infinity, ease: "easeInOut" }
+          }
         />
       </div>
     </section>

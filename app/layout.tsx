@@ -53,7 +53,22 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="pt-BR" className={`${montserrat.variable} antialiased`}>
-      <body className="font-sans">{children}</body>
+      <body className="font-sans">
+        {/*
+          Failsafe for when JS fails to load/hydrate: the intro overlay and
+          every motion-driven reveal wrapper render at opacity:0 in the
+          server-rendered HTML and only become visible once client JS runs.
+          This hides the intro overlay (identified by its `role="status"`
+          attribute in IntroLoader) so the page isn't left permanently
+          blocked by it. It does not force individual `motion.div` reveal
+          wrappers to opacity:1 — Next.js/React don't emit a stable,
+          reliable class on those we can target from static CSS.
+        */}
+        <noscript>
+          <style>{`[role="status"] { display: none !important; }`}</style>
+        </noscript>
+        {children}
+      </body>
     </html>
   );
 }
