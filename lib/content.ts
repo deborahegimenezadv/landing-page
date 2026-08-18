@@ -181,6 +181,6 @@ export const contact = {
 export const footer = {
   disclaimer:
     "Conteúdo elaborado em conformidade com o Provimento 205/2021 do Conselho Federal da OAB, com finalidade meramente informativa, sem caráter publicitário ou promessa de resultado.",
-  copyright: "© 2026 Dantas Gimenez & Machado Advogados — OAB/MS 00.000",
+  copyright: "© 2026 Dantas Gimenez & Machado Advogados",
   team: "Deborah C. P. Dantas Gimenez · Vinícius Mattos Machado · Antoliano Santana Gimenez",
 };

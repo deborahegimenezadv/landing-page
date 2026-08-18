@@ -28,3 +28,9 @@ test("cinematic scroll pins the desktop hero and animates each scene", async () 
   assert.match(motion, /useIntro/);
   assert.match(motion, /!introDone/);
 });
+
+test("home page is dynamically rendered to prevent stale deployment HTML", async () => {
+  const page = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
+
+  assert.match(page, /export const dynamic = "force-dynamic"/);
+});

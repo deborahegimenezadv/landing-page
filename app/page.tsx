@@ -11,6 +11,10 @@ import { Faq } from "@/components/sections/Faq";
 import { Contato } from "@/components/sections/Contato";
 import { CinematicScroll } from "@/components/motion/CinematicScroll";
 
+// Prevent a CDN from serving HTML from a previous deployment whose asset hashes
+// no longer exist after the current build is released.
+export const dynamic = "force-dynamic";
+
 export default function Home() {
   return (
     <div className="bg-white text-navy">
