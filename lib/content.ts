@@ -1,11 +1,22 @@
 export const siteUrl = "https://dantasgimenez.adv.br";
 export const siteName = "Dantas Gimenez & Machado Advogados";
 
-export const whatsappNumber = "5567900000000";
 export const whatsappMessage = "Olá, gostaria de falar sobre um caso.";
-export const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-  whatsappMessage,
-)}`;
+
+function buildWhatsappLink(number: string) {
+  return `https://wa.me/${number}?text=${encodeURIComponent(whatsappMessage)}`;
+}
+
+export const whatsappNumbers = {
+  tributario: "5567998144478",
+  civilPrevidenciario: "5567999559249",
+};
+
+// Default for the site's general CTAs (nav, hero, floating button, contato) —
+// civil/previdenciário covers 2 of the 3 practice areas.
+export const whatsappLink = buildWhatsappLink(
+  whatsappNumbers.civilPrevidenciario,
+);
 
 export const navLinks = [
   { href: "#areas", label: "Áreas" },
@@ -21,6 +32,7 @@ export type Area = {
   description: string;
   lawyer: string;
   icon: "shield" | "receipt" | "scale";
+  whatsapp: string;
 };
 
 export const areas: Area[] = [
@@ -31,6 +43,7 @@ export const areas: Area[] = [
       "Concessão e revisão de benefícios do INSS, aposentadorias e ações judiciais previdenciárias.",
     lawyer: "Deborah Cristhina Peixoto Dantas Gimenez",
     icon: "shield",
+    whatsapp: buildWhatsappLink(whatsappNumbers.civilPrevidenciario),
   },
   {
     tag: "TRIBUTÁRIO",
@@ -39,6 +52,7 @@ export const areas: Area[] = [
       "Planejamento tributário, defesa em autuações fiscais e contencioso administrativo e judicial.",
     lawyer: "Vinícius Mattos Machado",
     icon: "receipt",
+    whatsapp: buildWhatsappLink(whatsappNumbers.tributario),
   },
   {
     tag: "CIVIL",
@@ -47,6 +61,7 @@ export const areas: Area[] = [
       "Contratos, responsabilidade civil, direito de família e sucessões, e negociação extrajudicial.",
     lawyer: "Antoliano Santana Gimenez",
     icon: "scale",
+    whatsapp: buildWhatsappLink(whatsappNumbers.civilPrevidenciario),
   },
 ];
 
@@ -95,7 +110,7 @@ export const lawyers: Lawyer[] = [
     name: "Deborah Cristhina Peixoto Dantas Gimenez",
     area: "Direito Previdenciário",
     bio: "Atua com concessão e revisão de benefícios do INSS, aposentadorias e ações judiciais previdenciárias.",
-    oab: "OAB/MS 123.456",
+    oab: "OAB/MS 24.262",
     photoLabel: "foto — Deborah Gimenez",
     photoSrc: "/deborah.jpeg",
   },
@@ -103,7 +118,7 @@ export const lawyers: Lawyer[] = [
     name: "Vinícius Mattos Machado",
     area: "Direito Tributário",
     bio: "Atua com planejamento tributário, defesa em autuações fiscais e contencioso tributário administrativo e judicial.",
-    oab: "OAB/MS 234.567",
+    oab: "OAB/MS 30.725",
     photoLabel: "foto — Vinícius Machado",
     photoSrc: "/vinicius.jpg",
   },
@@ -111,7 +126,7 @@ export const lawyers: Lawyer[] = [
     name: "Antoliano Santana Gimenez",
     area: "Direito Civil",
     bio: "Atua com contratos, responsabilidade civil, direito de família e sucessões.",
-    oab: "OAB/MS 345.678",
+    oab: "OAB/MS 32.159",
     photoLabel: "foto — Antoliano Gimenez",
   },
 ];
@@ -145,11 +160,11 @@ export const faqs: Faq[] = [
   },
 ];
 
-const street = "Rua das Palmeiras, 480 — Sala 902";
-const neighborhood = "Centro";
+const street = "R. Brilhante, n° 983";
+const neighborhood = "Vila Bandeirante";
 const city = "Campo Grande";
 const state = "MS";
-const postalCode = "79002-000";
+const postalCode = "79005-520";
 
 export const contact = {
   street,
@@ -158,8 +173,8 @@ export const contact = {
   state,
   postalCode,
   addressLines: [street, `${neighborhood}, ${city}/${state} — CEP ${postalCode}`],
-  phone: "(67) 3000-0000",
-  phoneIntl: "+55 67 3000-0000",
+  phone: "(67) 9955-9249",
+  phoneIntl: "+55 67 99955-9249",
   email: "contato@dantasgimenez.adv.br",
 };
 

@@ -41,9 +41,15 @@ function AreaCard({ area }: { area: Area }) {
       <p className="mb-5 text-sm leading-[1.7] text-muted sm:text-[15px]">
         {area.description}
       </p>
-      <div className="border-t border-line pt-[18px] text-[13px] font-semibold text-navy">
-        {area.lawyer}
-      </div>
+      <a
+        href={area.whatsapp}
+        target="_blank"
+        rel="noopener"
+        className="flex items-center justify-between gap-3 border-t border-line pt-[18px] text-[13px] font-semibold text-navy transition-colors hover:text-gold"
+      >
+        <span>{area.lawyer}</span>
+        <span className="whitespace-nowrap text-gold">WhatsApp →</span>
+      </a>
     </div>
   );
 }
