@@ -20,7 +20,10 @@ export function IntroLoader({ onComplete }: IntroLoaderProps) {
     if (!overlay || !svg) return;
 
     const previousOverflow = document.body.style.overflow;
+    const previousScrollRestoration = window.history.scrollRestoration;
     document.body.style.overflow = "hidden";
+    window.history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
 
     let finished = false;
     const finish = () => {
@@ -40,6 +43,7 @@ export function IntroLoader({ onComplete }: IntroLoaderProps) {
       timelineRef.current = tl;
       return () => {
         tl.kill();
+        window.history.scrollRestoration = previousScrollRestoration;
         if (!finished) {
           document.body.style.overflow = previousOverflow;
         }
@@ -81,6 +85,7 @@ export function IntroLoader({ onComplete }: IntroLoaderProps) {
 
     return () => {
       tl.kill();
+      window.history.scrollRestoration = previousScrollRestoration;
       if (!finished) {
         document.body.style.overflow = previousOverflow;
       }

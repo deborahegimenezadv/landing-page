@@ -4,6 +4,7 @@ import { useLayoutEffect, useRef, type ReactNode } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useReducedMotion } from "motion/react";
+import { useIntro } from "@/components/intro/IntroProvider";
 
 type CinematicScrollProps = {
   children: ReactNode;
@@ -14,28 +15,94 @@ gsap.registerPlugin(ScrollTrigger);
 export function CinematicScroll({ children }: CinematicScrollProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
+  const introDone = useIntro();
 
   useLayoutEffect(() => {
     const root = rootRef.current;
-    if (!root || prefersReducedMotion || window.innerWidth < 768) return;
+    if (!root || !introDone || prefersReducedMotion || window.innerWidth < 768) {
+      return;
+    }
 
+    let removeMetadataListener: () => void = () => {};
     const context = gsap.context(() => {
       const select = <T extends Element>(selector: string) =>
         root.querySelector<T>(selector);
 
+      const hero = select<HTMLElement>("#topo");
       const heroVideo = select<HTMLElement>("[data-cinematic='hero-video']");
-      if (heroVideo) {
-        gsap.to(heroVideo, {
-          yPercent: 8,
-          opacity: 0.5,
-          ease: "none",
+      const heroScenes = gsap.utils.toArray<HTMLElement>(
+        "[data-hero-scene]",
+        root,
+      );
+      if (hero && heroVideo && heroScenes.length === 3) {
+        const media = heroVideo.querySelector<HTMLVideoElement>("video");
+        const [opening, clarity, commitment] = heroScenes;
+        const heroIntro = select<HTMLElement>("[data-hero-intro]");
+        const heroActions = select<HTMLElement>("[data-hero-actions]");
+
+        gsap.set(opening, { autoAlpha: 1, y: 0, filter: "blur(0px)" });
+        gsap.set([clarity, commitment], {
+          autoAlpha: 0,
+          y: 42,
+          filter: "blur(12px)",
+        });
+        if (heroActions) {
+          gsap.set(heroActions, { autoAlpha: 0, y: 18 });
+        }
+
+        const heroTimeline = gsap.timeline({
           scrollTrigger: {
-            trigger: "#topo",
+            trigger: hero,
             start: "top top",
-            end: "bottom top",
-            scrub: true,
+            end: "+=160%",
+            pin: true,
+            anticipatePin: 1,
+            scrub: 0.45,
+            invalidateOnRefresh: true,
           },
         });
+
+        heroTimeline
+          .to(heroVideo, { scale: 1.1, yPercent: -2, duration: 2.4, ease: "none" }, 0)
+          .to(heroIntro, { autoAlpha: 0, y: -12, duration: 0.2 }, 0.38)
+          .to(opening, { autoAlpha: 0, y: -30, filter: "blur(8px)", duration: 0.3 }, 0.44)
+          .to(clarity, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.3 }, 0.57)
+          .to(clarity, { autoAlpha: 0, y: -30, filter: "blur(8px)", duration: 0.3 }, 1.18)
+          .to(commitment, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.34 }, 1.34);
+
+        if (heroActions) {
+          heroTimeline.to(
+            heroActions,
+            { autoAlpha: 1, y: 0, duration: 0.22, ease: "power2.out" },
+            1.62,
+          );
+        }
+
+        if (media) {
+          const syncVideo = () => {
+            if (!Number.isFinite(media.duration)) return;
+
+            const playback = { time: 0 };
+            heroTimeline.to(playback, {
+              time: Math.max(media.duration - 0.08, 0),
+              duration: 2.4,
+              ease: "none",
+              onUpdate: () => {
+                media.currentTime = playback.time;
+              },
+            }, 0);
+
+            ScrollTrigger.refresh();
+          };
+
+          if (media.readyState >= HTMLMediaElement.HAVE_METADATA) {
+            syncVideo();
+          } else {
+            media.addEventListener("loadedmetadata", syncVideo, { once: true });
+            removeMetadataListener = () =>
+              media.removeEventListener("loadedmetadata", syncVideo);
+          }
+        }
       }
 
       const areasGrid = select<HTMLElement>("[data-cinematic='areas-grid']");
@@ -153,8 +220,11 @@ export function CinematicScroll({ children }: CinematicScrollProps) {
       }
     }, root);
 
-    return () => context.revert();
-  }, [prefersReducedMotion]);
+    return () => {
+      removeMetadataListener();
+      context.revert();
+    };
+  }, [introDone, prefersReducedMotion]);
 
   return <div ref={rootRef}>{children}</div>;
 }

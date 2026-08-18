@@ -18,7 +18,7 @@ export function Hero() {
     if (!content || !introDone) return;
 
     const context = gsap.context(() => {
-      const elements = gsap.utils.toArray<HTMLElement>("[data-hero-reveal]");
+      const elements = gsap.utils.toArray<HTMLElement>("[data-hero-intro]");
       const line = content.querySelector<HTMLElement>("[data-hero-line]");
 
       if (prefersReducedMotion) {
@@ -56,6 +56,7 @@ export function Hero() {
         <CinematicVideo
           src="/hero.mp4"
           priority
+          scrollControlled={!prefersReducedMotion}
           className="h-full w-full scale-105 object-cover opacity-75"
         />
       </div>
@@ -65,46 +66,91 @@ export function Hero() {
       <div className="absolute inset-y-0 left-0 w-1.5 bg-gradient-to-b from-gold to-transparent" />
 
       <div className="relative z-10 mx-auto w-full max-w-[1180px]">
-        <div ref={contentRef} className="max-w-[720px]">
-          <div data-hero-reveal className="mb-6 flex items-center gap-3 sm:mb-7">
+        <div
+          ref={contentRef}
+          className="relative max-w-[720px] lg:min-h-[470px]"
+        >
+          <div data-hero-intro className="mb-6 flex items-center gap-3 sm:mb-7">
             <span data-hero-line className="h-px bg-gold" />
             <span className="text-xs font-semibold tracking-[0.24em] text-text-gold-soft">
               ADVOCACIA
             </span>
           </div>
-          <h1
-            data-hero-reveal
-            className="mb-5 text-[32px] font-bold leading-[1.2] text-white sm:mb-[26px] sm:text-[40px] lg:text-[52px] lg:leading-[1.15]"
-          >
-            Orientação jurídica objetiva em Previdenciário, Tributário e
-            Civil.
-          </h1>
-          <p
-            data-hero-reveal
-            className="mb-8 max-w-[560px] text-base font-light leading-[1.7] text-text-soft sm:mb-10 sm:text-[17px]"
-          >
-            Três áreas, três advogados responsáveis. Cada caso é conduzido
-            diretamente por quem responde por aquela área — do primeiro
-            contato à solução.
-          </p>
           <div
-            data-hero-reveal
-            className="flex flex-col gap-4 sm:flex-row sm:flex-wrap"
+            data-hero-scene="opening"
+            className="lg:absolute lg:inset-x-0 lg:top-[56px]"
           >
-            <a
-              href={whatsappLink}
-              target="_blank"
-              rel="noopener"
-              className="inline-block rounded-[3px] bg-gold px-[30px] py-4 text-center text-sm font-semibold tracking-[0.02em] text-white transition-all hover:-translate-y-0.5 hover:bg-gold-dark"
-            >
-              Falar no WhatsApp
-            </a>
-            <a
-              href="#areas"
-              className="inline-block rounded-[3px] border border-white/30 px-[30px] py-4 text-center text-sm font-semibold text-white transition-colors hover:border-gold hover:text-text-gold-soft"
-            >
-              Conhecer as áreas
-            </a>
+            <h1 className="mb-5 text-[32px] font-bold leading-[1.2] text-white sm:mb-[26px] sm:text-[40px] lg:text-[52px] lg:leading-[1.15]">
+              Orientação jurídica objetiva.
+              <span className="block text-text-gold-soft">
+                Previdenciário, Tributário e Civil.
+              </span>
+            </h1>
+            <p className="mb-8 max-w-[560px] text-base font-light leading-[1.7] text-text-soft sm:mb-10 sm:text-[17px]">
+              Três áreas, três advogados responsáveis. Do primeiro contato à
+              solução, cada caso tem uma condução direta e técnica.
+            </p>
+            <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap lg:hidden lg:motion-reduce:flex">
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noopener"
+                className="inline-block rounded-[3px] bg-gold px-[30px] py-4 text-center text-sm font-semibold tracking-[0.02em] text-white transition-all hover:-translate-y-0.5 hover:bg-gold-dark"
+              >
+                Falar no WhatsApp
+              </a>
+              <a
+                href="#areas"
+                className="inline-block rounded-[3px] border border-white/30 px-[30px] py-4 text-center text-sm font-semibold text-white transition-colors hover:border-gold hover:text-text-gold-soft"
+              >
+                Conhecer as áreas
+              </a>
+            </div>
+          </div>
+
+          <div
+            data-hero-scene="clarity"
+            className="hidden lg:absolute lg:inset-x-0 lg:top-0 lg:block lg:invisible lg:opacity-0 motion-reduce:hidden"
+          >
+            <p className="mb-5 text-sm font-semibold tracking-[0.24em] text-text-gold-soft">
+              A DECISÃO COMEÇA COM CLAREZA
+            </p>
+            <h2 className="max-w-[650px] text-[52px] font-bold leading-[1.15] text-white">
+              Clareza no caminho.
+              <span className="block text-text-gold-soft">Segurança na decisão.</span>
+            </h2>
+          </div>
+
+          <div
+            data-hero-scene="commitment"
+            className="hidden lg:absolute lg:inset-x-0 lg:top-0 lg:block lg:invisible lg:opacity-0 motion-reduce:hidden"
+          >
+            <p className="mb-5 text-sm font-semibold tracking-[0.24em] text-text-gold-soft">
+              COMPROMISSO COM O SEU CASO
+            </p>
+            <h2 className="mb-6 max-w-[680px] text-[48px] font-bold leading-[1.15] text-white">
+              Cada caso, conduzido por quem responde por ele.
+            </h2>
+            <p className="mb-10 max-w-[560px] text-[17px] font-light leading-[1.7] text-text-soft">
+              Atendimento próximo, rigor técnico e comunicação direta em cada
+              etapa do processo.
+            </p>
+            <div data-hero-actions className="flex flex-wrap gap-4">
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noopener"
+                className="inline-block rounded-[3px] bg-gold px-[30px] py-4 text-center text-sm font-semibold tracking-[0.02em] text-white transition-all hover:-translate-y-0.5 hover:bg-gold-dark"
+              >
+                Falar no WhatsApp
+              </a>
+              <a
+                href="#areas"
+                className="inline-block rounded-[3px] border border-white/30 px-[30px] py-4 text-center text-sm font-semibold text-white transition-colors hover:border-gold hover:text-text-gold-soft"
+              >
+                Conhecer as áreas
+              </a>
+            </div>
           </div>
         </div>
       </div>
