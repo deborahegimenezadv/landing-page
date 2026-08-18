@@ -9,6 +9,7 @@ import { Sobre } from "@/components/sections/Sobre";
 import { Advogados } from "@/components/sections/Advogados";
 import { Faq } from "@/components/sections/Faq";
 import { Contato } from "@/components/sections/Contato";
+import { CinematicScroll } from "@/components/motion/CinematicScroll";
 
 export default function Home() {
   return (
@@ -16,12 +17,14 @@ export default function Home() {
       <StructuredData />
       <IntroProvider>
         <Navbar />
-        <Hero />
-        <Areas />
-        <Sobre />
-        <Advogados />
-        <Faq />
-        <Contato />
+        <CinematicScroll>
+          <Hero />
+          <Areas />
+          <Sobre />
+          <Advogados />
+          <Faq />
+          <Contato />
+        </CinematicScroll>
         <Footer />
         <WhatsAppButton />
       </IntroProvider>

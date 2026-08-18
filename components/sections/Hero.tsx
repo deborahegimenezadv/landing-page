@@ -6,6 +6,7 @@ import { useReducedMotion } from "motion/react";
 import { whatsappLink } from "@/lib/content";
 import { useIntro } from "@/components/intro/IntroProvider";
 import { CinematicBackdrop } from "@/components/hero/CinematicBackdrop";
+import { CinematicVideo } from "@/components/motion/CinematicVideo";
 
 export function Hero() {
   const introDone = useIntro();
@@ -48,6 +49,17 @@ export function Hero() {
       id="topo"
       className="relative flex min-h-[100svh] items-center overflow-hidden bg-navy px-5 pb-16 pt-28 sm:px-8 sm:pb-20 lg:pb-[100px] lg:pt-[140px]"
     >
+      <div
+        data-cinematic="hero-video"
+        className="absolute inset-0 overflow-hidden bg-navy"
+      >
+        <CinematicVideo
+          src="/hero.mp4"
+          priority
+          className="h-full w-full scale-105 object-cover opacity-75"
+        />
+      </div>
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(40,42,54,0.95)_0%,rgba(50,53,66,0.78)_42%,rgba(44,46,58,0.5)_72%,rgba(37,39,49,0.72)_100%)]" />
       <CinematicBackdrop active={introDone} />
 
       <div className="absolute inset-y-0 left-0 w-1.5 bg-gradient-to-b from-gold to-transparent" />

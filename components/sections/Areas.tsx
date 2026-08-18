@@ -68,16 +68,16 @@ export function Areas() {
           Cada advogado responde diretamente por sua área de atuação.
         </h2>
       </Reveal>
-      <Reveal
-        stagger
-        className="mx-auto mt-10 grid max-w-[1180px] grid-cols-1 gap-6 sm:mt-14 sm:grid-cols-2 sm:gap-7 lg:grid-cols-3"
-      >
-        {areas.map((area) => (
-          <RevealItem key={area.tag}>
-            <AreaCard area={area} />
-          </RevealItem>
-        ))}
-      </Reveal>
+      <div data-cinematic="areas-grid" className="relative mx-auto mt-10 max-w-[1180px] sm:mt-14">
+        <span data-cinematic="areas-line" className="absolute -top-3 left-0 h-px w-0 bg-gold" aria-hidden="true" />
+        <Reveal stagger className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-7 lg:grid-cols-3">
+          {areas.map((area) => (
+            <RevealItem key={area.tag}>
+              <AreaCard area={area} />
+            </RevealItem>
+          ))}
+        </Reveal>
+      </div>
     </section>
   );
 }

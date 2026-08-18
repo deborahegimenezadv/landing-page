@@ -7,7 +7,10 @@ function LawyerCard({ lawyer }: { lawyer: Lawyer }) {
   return (
     <div>
       {lawyer.photoSrc ? (
-        <div className="relative h-80 w-full overflow-hidden rounded-[3px]">
+        <div
+          data-cinematic="lawyer-photo"
+          className="relative h-80 w-full overflow-hidden rounded-[3px]"
+        >
           <Image
             src={lawyer.photoSrc}
             alt={lawyer.name}
@@ -17,7 +20,12 @@ function LawyerCard({ lawyer }: { lawyer: Lawyer }) {
           />
         </div>
       ) : (
-        <ImagePlaceholder label={lawyer.photoLabel} className="h-80 w-full" />
+        <div data-cinematic="lawyer-photo">
+          <ImagePlaceholder
+            label={lawyer.photoLabel}
+            className="h-80 w-full"
+          />
+        </div>
       )}
       <div className="pt-[22px]">
         <h3 className="mb-1 text-[19px] font-bold">{lawyer.name}</h3>
