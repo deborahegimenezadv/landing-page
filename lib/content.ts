@@ -128,6 +128,7 @@ export const lawyers: Lawyer[] = [
     bio: "Atua com contratos, responsabilidade civil, direito de família e sucessões.",
     oab: "OAB/MS 32.159",
     photoLabel: "foto — Antoliano Gimenez",
+    photoSrc: "/antoliano.JPG",
   },
 ];
 
