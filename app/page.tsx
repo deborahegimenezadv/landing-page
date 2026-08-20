@@ -17,7 +17,7 @@ export const dynamic = "force-dynamic";
 
 export default function Home() {
   return (
-    <div className="bg-white text-navy">
+    <div className="bg-wine text-ivory">
       <StructuredData />
       <IntroProvider>
         <Navbar />

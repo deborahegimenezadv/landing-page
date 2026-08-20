@@ -47,7 +47,7 @@ export function Advogados() {
   return (
     <section
       id="advogados"
-      className="bg-white px-5 py-16 sm:px-8 sm:py-24 lg:py-[120px]"
+      className="bg-wine px-5 py-16 sm:px-8 sm:py-24 lg:py-[120px]"
     >
       <Reveal className="mx-auto max-w-[1180px]">
         <span className="text-xs font-bold tracking-[0.24em] text-gold">

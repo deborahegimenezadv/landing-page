@@ -22,7 +22,7 @@ export function Sobre() {
   return (
     <section
       id="escritorio"
-      className="bg-cream px-5 py-16 sm:px-8 sm:py-24 lg:py-[104px]"
+      className="bg-wine-raised px-5 py-16 sm:px-8 sm:py-24 lg:py-[104px]"
     >
       <div className="mx-auto max-w-[1180px]">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
@@ -44,7 +44,7 @@ export function Sobre() {
               área correspondente ao caso.
             </p>
             <div className="mt-10 border-l border-gold pl-6 sm:mt-12">
-              <p className="max-w-[380px] text-xl font-semibold leading-[1.35] text-navy sm:text-2xl">
+              <p className="max-w-[380px] text-xl font-semibold leading-[1.35] text-ivory sm:text-2xl">
                 Cada caso tem um responsável. Cada decisão, um caminho claro.
               </p>
             </div>

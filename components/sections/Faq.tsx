@@ -10,7 +10,7 @@ export function Faq() {
   return (
     <section
       id="faq"
-      className="bg-cream px-5 py-16 sm:px-8 sm:py-24 lg:py-[120px]"
+      className="bg-wine-raised px-5 py-16 sm:px-8 sm:py-24 lg:py-[120px]"
     >
       <div className="mx-auto max-w-[780px]">
         <Reveal className="mb-10 text-center sm:mb-14">
@@ -39,9 +39,9 @@ export function Faq() {
                       {faq.question}
                     </h4>
                     <span className="relative h-[22px] w-[22px] flex-shrink-0">
-                      <span className="absolute left-0 top-1/2 h-0.5 w-[22px] -translate-y-1/2 bg-navy" />
+                      <span className="absolute left-0 top-1/2 h-0.5 w-[22px] -translate-y-1/2 bg-gold" />
                       <span
-                        className={`absolute left-1/2 top-0 h-[22px] w-0.5 -translate-x-1/2 bg-navy transition-opacity duration-[250ms] ${
+                        className={`absolute left-1/2 top-0 h-[22px] w-0.5 -translate-x-1/2 bg-gold transition-opacity duration-[250ms] ${
                           open ? "opacity-0" : "opacity-100"
                         }`}
                       />

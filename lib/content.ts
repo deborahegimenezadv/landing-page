@@ -30,8 +30,8 @@ export type Area = {
   tag: string;
   title: string;
   description: string;
+  topics: string[];
   lawyer: string;
-  icon: "shield" | "receipt" | "scale";
   whatsapp: string;
 };
 
@@ -41,8 +41,13 @@ export const areas: Area[] = [
     title: "Direito Previdenciário",
     description:
       "Concessão e revisão de benefícios do INSS, aposentadorias e ações judiciais previdenciárias.",
+    topics: [
+      "Aposentadorias",
+      "Benefícios do INSS",
+      "Revisão de benefícios",
+      "Ações previdenciárias",
+    ],
     lawyer: "Deborah Cristhina Peixoto Dantas Gimenez",
-    icon: "shield",
     whatsapp: buildWhatsappLink(whatsappNumbers.civilPrevidenciario),
   },
   {
@@ -50,8 +55,13 @@ export const areas: Area[] = [
     title: "Direito Tributário",
     description:
       "Planejamento tributário, defesa em autuações fiscais e contencioso administrativo e judicial.",
+    topics: [
+      "Planejamento tributário",
+      "Defesa em autuações fiscais",
+      "Contencioso administrativo",
+      "Contencioso judicial",
+    ],
     lawyer: "Vinícius Mattos Machado",
-    icon: "receipt",
     whatsapp: buildWhatsappLink(whatsappNumbers.tributario),
   },
   {
@@ -59,8 +69,13 @@ export const areas: Area[] = [
     title: "Direito Civil",
     description:
       "Contratos, responsabilidade civil, direito de família e sucessões, e negociação extrajudicial.",
+    topics: [
+      "Contratos",
+      "Responsabilidade civil",
+      "Direito de família",
+      "Sucessões e negociações",
+    ],
     lawyer: "Antoliano Santana Gimenez",
-    icon: "scale",
     whatsapp: buildWhatsappLink(whatsappNumbers.civilPrevidenciario),
   },
 ];

@@ -21,7 +21,7 @@ export function Navbar() {
     <nav
       className={`fixed inset-x-0 top-0 z-50 transition-[background,box-shadow] duration-300 ${
         solid
-          ? "bg-white shadow-[0_4px_24px_rgba(60,63,78,0.08)]"
+          ? "bg-wine-raised shadow-[0_4px_24px_rgba(0,0,0,0.24)]"
           : "bg-transparent"
       }`}
     >
@@ -33,7 +33,7 @@ export function Navbar() {
         >
           <span
             className={`text-[15px] font-bold tracking-[0.03em] sm:text-[17px] ${
-              solid ? "text-navy" : "text-white"
+              solid ? "text-ivory" : "text-white"
             }`}
           >
             DANTAS GIMENEZ <span className="text-gold">&amp;</span> MACHADO
@@ -53,7 +53,7 @@ export function Navbar() {
               key={link.href}
               href={link.href}
               className={`text-sm font-medium transition-colors hover:text-gold ${
-                solid ? "text-navy" : "text-white"
+                solid ? "text-ivory" : "text-white"
               }`}
             >
               {link.label}
@@ -75,7 +75,7 @@ export function Navbar() {
           aria-label={open ? "Fechar menu" : "Abrir menu"}
           aria-expanded={open}
           className={`flex h-9 w-9 items-center justify-center lg:hidden ${
-            solid ? "text-navy" : "text-white"
+            solid ? "text-ivory" : "text-white"
           }`}
         >
           {open ? <X size={24} /> : <Menu size={24} />}
@@ -83,7 +83,7 @@ export function Navbar() {
       </div>
 
       <div
-        className={`overflow-hidden bg-white transition-[max-height] duration-300 ease-in-out lg:hidden ${
+        className={`overflow-hidden bg-wine-raised transition-[max-height] duration-300 ease-in-out lg:hidden ${
           open ? "max-h-[420px]" : "max-h-0"
         }`}
       >
@@ -93,7 +93,7 @@ export function Navbar() {
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="rounded-[3px] px-2 py-3 text-sm font-medium text-navy transition-colors hover:bg-cream hover:text-gold"
+              className="rounded-[3px] px-2 py-3 text-sm font-medium text-ivory transition-colors hover:bg-wine-card hover:text-gold"
             >
               {link.label}
             </a>
